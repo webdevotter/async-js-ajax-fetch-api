@@ -1,52 +1,26 @@
-document.getElementById('button').addEventListener('click', loadData);
+document.getElementById('button1').addEventListener('click', loadCustomer);
 
-function loadData() {
-  // Create an XHR Object
+function loadCustomer(e) {
   const xhr = new XMLHttpRequest();
 
-  // OPEN
-  xhr.open('GET', 'data.txt', true);
-
-  // console.log('READYSTATE', xhr.readyState);
-
-  // Optional - Used for spinners/loaders 
-  xhr.onprogress = function() {
-    console.log('READYSTATE', xhr.readyState);
-  }
+  xhr.open('OPEN', 'customer.json', true);
 
   xhr.onload = function() {
-    console.log('READYSTATE', xhr.readyState);
-    if(this.status === 200) {
-      // console.log(this.responseText);
-      document.getElementById('output').innerHTML = `<h1 style="color: blue";> Data Received: ${this.responseText}</h1>`
+    if(this.status == 200) {
+      console.log(this.responseText);
+    //   const customer = JSON.parse(this.responseText);
+
+    //   const output = `<ul>
+    //                     <li>ID: ${customer.id}</li>
+    //                     <li>NAME: ${customer.name}</li>
+    //                     <li>COMPANY: ${customer.company}</li>
+    //                     <li>PHONE: ${customer.phone}</li>
+    //                   </ul>`; 
+
+    // document.getElementById('customer').innerHTML = output;
     }
   }
 
-  // xhr.onreadystatechange = function() {
-  //   console.log('READYSTATE', xhr.readyState);
-  //   if(this.status === 200 && this.readyState === 4) {
-  //     console.log(this.responseText);
-  //   }
-  // }
-  
-  xhr.onerror = function() {
-    console.log('Request error...');
-  }
-
   xhr.send();
-
-// readyState Values
-
-// Value	State	            Description
-// 0	    UNSENT	          Client has been created. open() not called yet.
-// 1	    OPENED	          open() has been called.
-// 2	    HEADERS_RECEIVED	send() has been called, and headers and status are available.
-// 3	    LOADING	          Downloading; responseText holds partial data.
-// 4	    DONE	            The operation is complete.
-
-  // HTTP Statuses
-  // 200: "OK"
-  // 403: "Forbidden"
-  // 404: "Not Found"
 }
 
